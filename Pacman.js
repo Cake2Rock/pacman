@@ -6,7 +6,11 @@ export default class Pacman {
       this.velocity = velocity;
       this.tileMap = tileMap;
     }
-    draw(ctx) {}
+    draw(ctx) {
+      
+        ctx.drawImage(this.pacmanImageIndex[this.pacmanImageIndex],this.x, this.y,this.tileSize,this.tileSize)
+
+    }
 
     #loadPacmanImages() {
         const pacmanImage1 = new Image();
@@ -25,6 +29,8 @@ export default class Pacman {
           pacmanImage1,
           pacmanImage2,
           pacmanImage3,
-          pacmanImage4,
+          pacmanImage2,
         ];
-    
+        this.pacmanImageIndex = 0;
+    }
+  }
