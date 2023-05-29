@@ -8,6 +8,7 @@ export default class Pacman {
       this.tileSize = tileSize;
       this.velocity = velocity;
       this.tileMap = tileMap;
+      this.wakaSound = new Audio("sounds/waka.wav");
 
       this.pacmanRotation = this.Rotation.right;
 
@@ -180,7 +181,7 @@ export default class Pacman {
   }
   #eatDot() {
     if (this.tileMap.eatDot(this.x, this.y) && this.madeFirstMove) {
-      this.wakaSound.play();
+         this.wakaSound.play();
     }
   }
 }
