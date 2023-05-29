@@ -9,6 +9,8 @@ export default class Pacman {
       this.velocity = velocity;
       this.tileMap = tileMap;
 
+      this.pacmanRotation = this.Rotation.right;
+
       this.currentMovingDirection = null;
       this.requestedMovingDirection = null;
 
@@ -19,6 +21,12 @@ export default class Pacman {
 
       this.#loadPacmanImages();
     }
+    Rotation = {
+        right: 0,
+        down: 1,
+        left: 2,
+        up: 3,
+      };
     draw(ctx) {
 
       this.#move();
