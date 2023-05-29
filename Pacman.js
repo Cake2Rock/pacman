@@ -166,6 +166,7 @@ export default class Pacman {
         }
       
   #animate() {
+
     if (this.pacmanAnimationTimer == null) {
       return;
     }
@@ -176,4 +177,10 @@ export default class Pacman {
       if (this.pacmanImageIndex == this.pacmanImages.length)
         this.pacmanImageIndex = 0;
     }
-  }}
+  }
+  #eatDot() {
+    if (this.tileMap.eatDot(this.x, this.y) && this.madeFirstMove) {
+      this.wakaSound.play();
+    }
+  }
+}
