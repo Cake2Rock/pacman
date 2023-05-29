@@ -17,7 +17,8 @@ export default class Pacman {
       this.#loadPacmanImages();
     }
     draw(ctx) {
-      
+
+      this.#move();
         ctx.drawImage(this.pacmanImageIndex[this.pacmanImageIndex],this.x, this.y,this.tileSize,this.tileSize)
 
     }
@@ -73,5 +74,37 @@ export default class Pacman {
           this.madeFirstMove = true;
         }
       };
-
-  }
+      #move() {
+        if (this.currentMovingDirection !== this.requestedMovingDirection) {
+          if (
+            Number.isInteger(this.x / this.tileSize) &&
+            Number.isInteger(this.y / this.tileSize)
+          ) {
+            if (
+              !this.tileMap.didCollideWithEnvironment(
+                this.x,
+                this.y,
+                this.requestedMovingDirection
+              )
+            )
+              this.currentMovingDirection = this.requestedMovingDirection;
+          }
+        }
+        switch (this.currentMovingDirection) {
+            case MovingDirection.up:
+              this.y -= this.velocity;
+              this.pacmanRotation = this.Rotation.up;
+              break;
+            case MovingDirection.down:
+              this.y += this.velocity;
+              this.pacmanRotation = this.Rotation.down;
+              break;
+            case MovingDirection.left:
+              this.x -= this.velocity;
+              this.pacmanRotation = this.Rotation.left;
+              break;
+            case MovingDirection.right:
+              this.x += this.velocity;
+              this.pacmanRotation = this.Rotation.right;
+              break;
+  }}}
