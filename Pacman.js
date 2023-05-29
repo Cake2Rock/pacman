@@ -27,12 +27,25 @@ export default class Pacman {
         left: 2,
         up: 3,
       };
-    draw(ctx) {
-
-      this.#move();
-      this.#animate();
-      ctx.drawImage(this.pacmanImageIndex[this.pacmanImageIndex],this.x, this.y,this.tileSize,this.tileSize)
-    }
+      draw(ctx){
+        if (!pause) {
+          this.#move();
+          this.#animate();
+        
+    
+        const size = this.tileSize / 2;
+    
+        ctx.save();
+        ctx.translate(this.x + size, this.y + size);
+        ctx.rotate((this.pacmanRotation * 90 * Math.PI) / 180);
+        ctx.drawImage(
+          this.pacmanImages[this.pacmanImageIndex],
+          -size,
+          -size,
+          this.tileSize,
+          this.tileSize
+        );
+        }}
  
 
     #loadPacmanImages() {
