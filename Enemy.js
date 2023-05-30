@@ -21,6 +21,7 @@ export default class Enemy {
       }
       draw(ctx) {
         this.#move();
+        this.#changeDirection();
         ctx.drawImage(this.image,this.x, this.y, this.tileSize, this.tileSize);
       }
       #move() {
@@ -63,4 +64,29 @@ export default class Enemy {
 
     this.image = this.normalGhost;
   }
-}
+  #changeDirection() {
+    this.directionTimer--;
+    let newMoveDirection = null;
+    if (this.directionTimer == 0) {
+      this.directionTimer = this.directionTimerDefault;
+      newMoveDirection = Math.floor(
+        Math.random() * Object.keys(MovingDirection).length
+      );
+    }
+    if (newMoveDirection != null && this.movingDirection != newMoveDirection) {
+        if (
+          Number.isInteger(this.x / this.tileSize) &&
+          Number.isInteger(this.y / this.tileSize)
+        ) {
+          if (
+            !this.tileMap.didCollideWithEnvironment(
+              this.x,
+              this.y,
+              newMoveDirection
+            )
+          ) {
+            this.movingDirection = newMoveDirection;
+          }
+        }
+      }
+}}
