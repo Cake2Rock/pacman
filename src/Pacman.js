@@ -15,6 +15,11 @@ export default class Pacman {
       this.currentMovingDirection = null;
       this.requestedMovingDirection = null;
 
+      this.powerDotSound = new Audio("sounds/power_dot.wav");
+      this.powerDotActive = false;
+      this.powerDotAboutToExpire = false;
+      this.timers = [];  
+
       this.pacmanAnimationTimerDefault = 10;
       this.pacmanAnimationTimer = null;
 
@@ -190,7 +195,7 @@ export default class Pacman {
             this.timers.push(powerDotAboutToExpireTimer);
           }
         }
-        
+
   #animate() {
 
     if (this.pacmanAnimationTimer == null) {
