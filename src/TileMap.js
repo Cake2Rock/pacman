@@ -203,6 +203,13 @@ export default class TileMap {
           }
         }
       }
+      didWin() {
+        return this.#dotsLeft() === 0;
+      }
+    
+      #dotsLeft() {
+        return this.map.flat().filter((tile) => tile === 0).length;
+      }
     
       eatDot(x, y) {
         const row = y / this.tileSize;
