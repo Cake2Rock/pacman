@@ -192,6 +192,17 @@ export default class TileMap {
       #dotsLeft() {
         return this.map.flat().filter((tile) => tile === 0).length;
       }
+      eatPowerDot(x, y) {
+        const row = y / this.tileSize;
+        const column = x / this.tileSize;
+        if (Number.isInteger(row) && Number.isInteger(column)) {
+          const tile = this.map[row][column];
+          if (tile === 7) {
+            this.map[row][column] = 5;
+            return true;
+          }
+        }
+      }
     
       eatDot(x, y) {
         const row = y / this.tileSize;
