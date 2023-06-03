@@ -23,6 +23,8 @@ export default class Pacman {
       this.pacmanAnimationTimerDefault = 10;
       this.pacmanAnimationTimer = null;
 
+      this.eatGhostSound = new Audio("sounds/eat_ghost.wav");
+
       this.madeFirstMove = false;
 
       document.addEventListener("keydown", this.#keydown);
@@ -35,11 +37,15 @@ export default class Pacman {
         left: 2,
         up: 3,
       };
-      draw(ctx){
+      draw(ctx, pause, enemies){
         if (!pause) {
           this.#move();
           this.#animate();
         
+        }
+        this.#eatDot();
+        this.#eatPowerDot();
+        this.#eatGhost(enemies);
     
         const size = this.tileSize / 2;
     
@@ -53,7 +59,7 @@ export default class Pacman {
           this.tileSize,
           this.tileSize
         );
-        }}
+        }
  
 
     #loadPacmanImages() {
@@ -207,6 +213,15 @@ export default class Pacman {
       this.pacmanImageIndex++;
       if (this.pacmanImageIndex == this.pacmanImages.length)
         this.pacmanImageIndex = 0;
+    }
+  }
+  #eatGhost(enemies) {
+    if (this.powerDotActive) {
+      const collideEnemies = enemies.filter((enemy) => enemy.collideWith(this));
+      collideEnemies.forEach((enemy) => {
+        enemies.splice(enemies.indexOf(enemy), 1);
+        this.eatGhostSound.play();
+      });
     }
   }
   #eatDot() {
