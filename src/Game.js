@@ -13,10 +13,12 @@ const gameOverSound = new Audio("sounds/gameOver.wav");
 const gameWinSound = new Audio("sounds/gameWin.wav");
 
 function gameLoop() {
-    tileMap.draw(ctx);
-    pacman.draw(ctx, pause(), enemies);
-    enemies.forEach((enemy) => enemy.draw(ctx, pause(), pacman));
-
+  tileMap.draw(ctx);
+  drawGameEnd();
+  pacman.draw(ctx, pause(), enemies);
+  enemies.forEach((enemy) => enemy.draw(ctx, pause(), pacman));
+  checkGameOver();
+  checkGameWin();
   }
 
   function pause() {
