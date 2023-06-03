@@ -17,6 +17,8 @@ export default class Pacman {
 
       this.pacmanAnimationTimerDefault = 10;
       this.pacmanAnimationTimer = null;
+      
+      this.madeFirstMove = false;
 
       document.addEventListener("keydown", this.#keydown);
 
