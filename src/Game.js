@@ -59,13 +59,13 @@ function drawGameEnd() {
     }
 
     ctx.fillStyle = "black";
-    ctx.fillRect(0, canvas.height / 3.2, canvas.width, 80);
+    ctx.fillRect(0, canvas.height / 2.55, canvas.width,90);
 
     ctx.font = "75px comic sans";
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-    gradient.addColorStop("0", "magenta");
+    gradient.addColorStop("0", "yellow");
     gradient.addColorStop("0.5", "blue");
-    gradient.addColorStop("1.0", "red");
+    gradient.addColorStop("1.0", "yellow");
 
     ctx.fillStyle = gradient;
     ctx.fillText(text, 10, canvas.height / 2);
